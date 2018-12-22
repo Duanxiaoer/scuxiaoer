@@ -13,6 +13,6 @@
 <body>
 </body>
 <script>
-    window.location="login/login.html"
+    window.location="/home/home.jsp"
 </script>
 </html>

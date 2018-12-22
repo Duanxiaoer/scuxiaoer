@@ -1,3 +1,7 @@
+<%@ page import="scuxiaoer.SentEmail" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="scuxiaoer.DB" %>
+<%@ page import="java.sql.ResultSet" %>
 <%--
   Created by IntelliJ IDEA.
   User: duanqifeng
@@ -117,16 +121,9 @@
 
                 //**连接数据库**
                 try{
-                    String connectString = "jdbc:mysql://localhost/scuxiaoer"
-                            + "?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8";
-                    String user = "root";
-                    String pwd = "dqf009.";
-                    String sql = "select *from cards;";
-                    Class.forName("com.mysql.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection(connectString, user, pwd);
-
-                    Statement state = conn.createStatement();
-                    rs = state.executeQuery(sql);
+                    DB db = new DB();
+                    db.connectToDB();
+                    rs = db.queryCards();
 //            获取数据库行数
                     rs.last();
                     RowAmount = rs.getRow();
@@ -154,8 +151,6 @@
                         rs.next();
                     }
                     rs.close();
-                    state.close();
-                    conn.close();
                 }catch (Exception e){
                     e.printStackTrace();
                 }

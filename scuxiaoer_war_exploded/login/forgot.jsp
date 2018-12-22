@@ -1,7 +1,8 @@
 <%@ page import="scuxiaoer.SentEmail" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="scuxiaoer.DB" %>
-<%@ page import="java.sql.ResultSet" %><%--
+<%@ page import="java.sql.ResultSet" %>
+<%--
   Created by IntelliJ IDEA.
   Tucao: duanqifeng
   Date: 2018/7/17
