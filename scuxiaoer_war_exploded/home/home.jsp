@@ -10,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@page import="java.sql.Connection,java.sql.Statement,java.util.Scanner,java.sql.*"%>
+<%@ page import="javafx.scene.transform.ShearBuilder" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 
@@ -18,6 +19,7 @@
 <html>
 <head>
 
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/log.ico" >
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>带它回家</title>
     <link rel="stylesheet" media="screen" href="css/css.css" />
@@ -40,140 +42,170 @@
         table{
             border-collapse: collapse;
             border: none;
-            width: 700px;
+            background-color: #FFFFFF;
+            width: 100%;
         }
         td,th{
             border: solid grey 1px;
             margin: 0 0 0 0;
-            padding: 5px 5px 5px 5px
+            padding: 2px 2px 2px 2px
         }
         .c1 {
-            width:100px
+            width:auto
         }
         .c2 {
-            width:200px
+            width:auto
         }
         .c3 {
-            width:100px
+            width:auto
         }
         .c4 {
-            width:100px
+            width:auto
         }
         .c5 {
-            width:100px
+            width:auto
         }
-        .c6 {
-            width:100px
-        }
+
         a:link,a:visited {
             color:blue
         }
 
         .container{
             margin:0 auto;
-            width:700px;
+            width:80%;
             text-align:center;
         }
 
     </style>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Insert title here</title>
 </head>
 <body>
-<fieldset>
-    <div class="container">
-        <h1>浏览学生名单</h1>
-        <table>
-            <tr>
-                <th class='c1'>序号</th>
-                <th class='c1'>姓名</th>
-                <th class='c2'>学号</th>
-                <th class='c3'>学院</th>
-                <th class='c4'>领取地址</th>
-                <th class='c5'>电话</th>
-            </tr>
 
-            <%
-                String pgno = "";  //网址中传递的页面数据
-                String pgcnt = ""; //网址传递的每页最大显示数目
-                int RowAmount = 0; //数据库中总的行数
-                int PageAmount = 0; //数据库所有页面可以组成多少个页面
-                int PageSize; //每页最大显示数目
-                int PageNow;  //当前页面
-                ResultSet rs;
-                if(request.getParameter("pgno")!=null){  //获取网址从传递的数据
-                    pgno = request.getParameter("pgno");
-                }else{
-                    pgno = "1";  //赋给初始值防止没有传入数据时崩溃
-                }
-                PageNow = java.lang.Integer.parseInt(pgno);
-                if(PageNow <= 0){
-                    PageNow = 1;
-                }
+    <div style="width: 100%" class="container">
+        <h1 style="align-content: center">浏览名单</h1>
 
-                if(request.getParameter("pgcnt")!=null){
-                    pgcnt = request.getParameter("pgcnt");
-                }else{
-                    pgcnt = "10";
-                }
-                PageSize = java.lang.Integer.parseInt(pgcnt); //转换为int类型
+        <br>
+        <br>
+        <form action="home.jsp">
+            <div style="padding-left: 20px"><input name="keywords" style="float: left" type="text" placeholder="姓名查询（只输入前两个字）"><input style="float: left;margin-left: 10px;color: #4cae4c" type="submit" value="查询"></div>
+        </form>
+        <br>
+        <br>
+        <div style="padding-right: 20px;padding-left: 20px">
+            <table>
+                <tr>
+                    <th class='c1'>序号</th>
+                    <th class='c1'>姓名</th>
+                    <th class='c2'>学号</th>
+                    <th class='c3'>学院</th>
+                    <th class='c4'>领取地址</th>
+                    <th class='c5'>电话</th>
+                </tr>
+                <%
+                    request.setCharacterEncoding("utf-8");
+                    String red = "#ff4d37";
+                    String keywords = "";//网页传过来的查询关键字
+                    String pgno = "";  //网址中传递的页面数据
+                    String pgcnt = ""; //网址传递的每页最大显示数目
 
-                //**连接数据库**
-                try{
-                    DB db = new DB();
-                    db.connectToDB();
-                    rs = db.queryCards();
+                    int RowAmount = 0; //数据库中总的行数
+                    int PageAmount = 0; //数据库所有页面可以组成多少个页面
+                    int PageSize; //每页最大显示数目
+                    int PageNow;  //当前页面
+                    ResultSet rs;
+                    if (request.getParameter("keywords") !=null){//获取网址传递的查询数据
+                        keywords = request.getParameter("keywords");
+                    }
+                    if(request.getParameter("pgno")!=null){  //获取从网址传递的数据
+                        pgno = request.getParameter("pgno");
+                    }else{
+                        pgno = "1";  //赋给初始值防止没有传入数据时崩溃
+                    }
+                    PageNow = java.lang.Integer.parseInt(pgno);
+                    if(PageNow <= 0){
+                        PageNow = 1;
+                    }
+
+                    if(request.getParameter("pgcnt")!=null){
+                        pgcnt = request.getParameter("pgcnt");
+                    }else{
+                        pgcnt = "66";
+                    }
+                    PageSize = java.lang.Integer.parseInt(pgcnt); //转换为int类型
+
+                    //**连接数据库**
+                    try{
+                        DB db = new DB();
+                        db.connectToDB();
+                        if (!keywords.equals("")){
+                            rs = db.likeQueryCards("name",keywords);
+                        }else {
+                            rs = db.queryCards();
+                        }
 //            获取数据库行数
-                    rs.last();
-                    RowAmount = rs.getRow();
+                        rs.last();
+                        RowAmount = rs.getRow();
 //            计算数据库中数据最大页面数
-                    PageAmount = (RowAmount + PageSize - 1 )/ PageSize;
-                    if(PageNow > PageAmount){
-                        PageNow = PageAmount;
-                    }
+                        PageAmount = (RowAmount + PageSize - 1 )/ PageSize;
+                        if(PageNow > PageAmount){
+                            PageNow = PageAmount;
+                        }
 //            将当前的rs指针指向要显示的页面首条数据
-                    if(PageAmount > 0){
-                        rs.absolute((PageNow - 1)*PageSize + 1);
-                    }
+                        if(PageAmount > 0){
+                            rs.absolute((PageNow - 1)*PageSize + 1);
+                        }
 //            循环获取数据
-                    for(int i = 0 ; i < PageSize && !rs.isAfterLast(); i++){
-            %>
-            <tr>
-                <td><%=rs.getString("id")%></td>
-                <td><%=rs.getString("name") %></td>
-                <td><%=rs.getString("stuNo") %></td>
-                <td><%=rs.getString("school") %></td>
-                <td><%=rs.getString("location") %></td>
-                <td><%=rs.getString("tel") %></td>
-            </tr>
-            <%
-                        rs.next();
+                        for(int i = 0 ; i < PageSize && !rs.isAfterLast(); i++){
+                            if (Integer.parseInt(rs.getString("id"))%2==0){
+                                red = "#FFF";
+                            }else{
+                                red = "#ff4d37";
+                            }
+                %>
+                <tr>
+                    <td><%=rs.getString("id")%></td>
+                    <td style="background-color: <%=red %>"><%=rs.getString("name") %></td>
+                    <td><%=rs.getString("stuNo") %></td>
+                    <td><%=rs.getString("school") %></td>
+                    <td><%=rs.getString("location") %></td>
+                    <td><%=rs.getString("tel") %></td>
+                </tr>
+                <%
+                            rs.next();
+                        }
+                        rs.close();
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
-                    rs.close();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            %>
-        </table>
-        <br><br>
-        <div style="float:left">
-            <a href="isLoggedIn.jsp">新增</a>
+                %>
+            </table>
         </div>
-        <div style="float:right">
-            <a href="home.jsp?pgno=<%=PageNow-1 %>&pgcnt=10">
-                上一页</a>    &nbsp;
-            <a href="home.jsp?pgno=<%=PageNow+1 %>&pgcnt=10">
-                下一页</a>
+
+        <br>
+
+        <div style="padding-right: 20px;padding-left: 20px">
+            <div style="float: left;width: 20px">
+                <a href="isLoggedIn.jsp"><input style="color: #ff4828" type="submit" value="我也捡到了卡" class="btn btn-primary"></a>
+            </div>
+            <div style="float: right">
+                <a href="home.jsp?pgno=<%=PageNow-1 %>&pgcnt=66" class="action-button"><input style="color: #4cae4c" type="submit" value="上一页" class="btn btn-primary"></a>
+            </div>
+            <div style="float: right;margin-right: 5px">
+                <a href="home.jsp?pgno=<%=PageNow+1 %>&pgcnt=66"><input style="color: #4cae4c" type="submit" value="下一页" class="btn btn-primary"></a>
+            </div>
         </div>
+
         <br><br>
         <br><br>
 
-        <p>总页数:<%=PageAmount %> 总卡数:<%=RowAmount %></p>
-        <p>当前是第<%=PageNow%>页</p>
+        <p>页数:<%=PageAmount %>/<%=PageNow%>&nbsp;&nbsp;&nbsp;总卡数:<%=RowAmount %></p>
+
 
     </div>
-</fieldset>
 
+
+    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="js/jquery.easing.min.js" type="text/javascript"></script>
+    <script src="js/jQuery.time.js" type="text/javascript"></script>
 </body>
 </html>

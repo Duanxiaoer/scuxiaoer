@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>SCUxiaoer</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/log.ico">
+
 </head>
 <body>
 </body>
