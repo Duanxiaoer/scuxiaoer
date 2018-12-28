@@ -68,7 +68,7 @@
             writer.print("<script>alert('密码错误！');window.history.back()</script>");
             break;
         case 2:
-            writer.print("<script>window.location='../home/home.jsp'</script>");
+            writer.print("<script>window.location='../home/home_menu.html'</script>");
             break;
     }
     writer.flush();

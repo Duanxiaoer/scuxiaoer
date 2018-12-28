@@ -1,0 +1,105 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>找小二领快递</title>
+    <link rel="stylesheet" media="screen" href="css/css.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FreeHTML5.co" />
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+</head>
+<body>
+<div style="display:none">
+
+</div>
+<form accept-charset="UTF-8" action="zhaokuaidi.jsp" method="post" id="msform">
+    <!-- progressbar -->
+    <ul class="fs-title" style="align-content: center;font-size: xx-large">
+        <li class="active">取件信息</li>
+    </ul>
+    <!-- fieldsets -->
+    <fieldset>
+        <h2 class="fs-title">所有小二均是川大学生，且均完成了实名认证</h2>
+        <h3 class="fs-subtitle">我们不会公开您的信息，信息仅您和取件小二可以查看</h3>
+        <table style="width: 100%">
+            <tr>
+                <td align="left"><h2 class="fs-subtitle-1">姓名:</h2></td>
+                <td>
+                    <input type="text" maxlength="30" name="customerName" placeholder="如：王小二（必填）" />
+                </td>
+            </tr>
+            <tr>
+                <td align="left"><h2 class="fs-subtitle-1">电话:</h2></td>
+                <td>
+                    <input type="text" maxlength="20" name="customerTel" placeholder="如：12345XXX（必填）">
+                </td>
+            </tr>
+            <tr>
+                <td align="left"><h2 class="fs-subtitle-1">取件<br>短信:</h2></td>
+                <td>
+                    <input type="text" maxlength="90" name="message" placeholder="如:[菜鸟驿站]圆通包裹到江安校区西南门快递街菜鸟驿站，请18:30前凭3-1-1375取（必填）">
+                </td>
+            </tr>
+            <tr>
+                <td align="left"><h2 class="fs-subtitle-1">围合<br>地址:</h2></td>
+                <td>
+                    <input name="location" maxlength="40" placeholder="如：西园15舍（必填）">
+                </td>
+            </tr>
+            <tr>
+                <td align="left"><h2 class="fs-subtitle-1">其他<br>情况<br>补充:</h2></td>
+                <td>
+                    <textarea style="height: 100px" name="qkbc" maxlength="90" placeholder="如：我可能会回来的比较晚，麻烦帮我先保管一下下（选填）"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td align="left"><h2 class="fs-subtitle-1">小二:</h2></td>
+                <td>
+                    <input name="xiaoer" placeholder="段小二（已实名认证）" disabled>
+                </td>
+            </tr>
+            <tr>
+                <td align="left"><h2 class="fs-subtitle-1">联系<br>方式:</h2></td>
+                <td>
+                    <input name="xiaoertel" placeholder="13072810205(推荐短信联系)" disabled>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" name="submit" class="action-button" value="提交" onclick="check()"/>
+        <a href="kuaidiinfo.html">
+            <input type="button" class="action-button" value="返回"/>
+        </a>
+    </fieldset>
+</form>
+<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="js/jquery.easing.min.js" type="text/javascript"></script>
+<script src="js/jQuery.time.js" type="text/javascript"></script>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+
+</body>
+<script>
+    function check(){
+        var f = confirm("请确认信息无误！")
+        if (f===true){
+            $('form').unbind('submit');
+            $('form').submit();
+        }else {
+            $('form').bind('submit',function(event){
+                event.preventDefault();
+            });
+        }
+    }
+</script>
+</html>

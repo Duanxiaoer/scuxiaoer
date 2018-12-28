@@ -82,11 +82,11 @@
         <br>
         <br>
         <form action="home.jsp">
-            <div style="padding-left: 20px"><input name="keywords" style="float: left" type="text" placeholder="姓名查询（只输入前两个字）"><input style="float: left;margin-left: 10px;color: #4cae4c" type="submit" value="查询"></div>
+            <div style="padding-left: 5px"><input name="keywords" style="float: left" type="text" placeholder="姓名查询"><input style="float: left;margin-left: 10px;border-style: hidden;color: #4cae4c" type="submit" value="查询"><a href="home_menu.html"><input type="button" style="position: center" value="主页"></a></div>
         </form>
         <br>
         <br>
-        <div style="padding-right: 20px;padding-left: 20px">
+        <div style="padding-right: 5px;padding-left: 5px">
             <table>
                 <tr>
                     <th class='c1'>序号</th>
