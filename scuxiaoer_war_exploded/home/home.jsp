@@ -13,7 +13,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/log.ico" >
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>带它回家</title>
@@ -81,7 +80,7 @@
 
         <br>
         <br>
-        <form action="home.jsp">
+        <form action="home.jsp" method="get">
             <div style="padding-left: 5px"><input name="keywords" style="float: left" type="text" placeholder="姓名查询"><input style="float: left;margin-left: 10px;border-style: hidden;color: #4cae4c" type="submit" value="查询"><a href="home_menu.html"><input type="button" style="position: center" value="主页"></a></div>
         </form>
         <br>
