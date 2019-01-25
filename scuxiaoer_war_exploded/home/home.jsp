@@ -193,8 +193,7 @@
         <br><br>
 
         <p>页数:<%=PageAmount %>/<%=PageNow%>&nbsp;&nbsp;&nbsp;总卡数:<%=RowAmount %></p>
-
-
+        
     </div>
 
 

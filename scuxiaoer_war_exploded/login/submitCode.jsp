@@ -32,9 +32,9 @@
         if (code_email != null){
             if (code_email.equals(code_input)){
                 db.connectToDB();
-                db.insertUserInfo("userinfo",email,pwd,name);
+                db.insertUserInfo(email,pwd,name);
                 writer.print("<script>alert('注册成功！');window.location='login.html'</script>");
-            }else if (code_input.equals("")){
+            }else{
                 writer.print("<script>alert('验证码错误🙅！');window.history.back()</script>");
                 return;
             }

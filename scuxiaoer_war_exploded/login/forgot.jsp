@@ -19,23 +19,17 @@
     PrintWriter writer=response.getWriter();
     DB db = new DB();
     db.connectToDB();
-    ResultSet resultSet = db.queryUserinfo();
+
     String email = request.getParameter("email");
+
     if (email.equals("")){
         writer.print("<script>alert('嘿嘿嘿，邮箱不填麦！');window.location='forgot.html'</script>");
-    }
-    boolean signed=false;
-    try{
-        while (resultSet.next()){
-            if (email.equals(resultSet.getString("email"))){
-                signed = true;
-            }
-        }
-    }catch (Exception e){
-        e.printStackTrace();
+        return;
     }
 
-    if (signed){
+    int status=db.checkUser(email,"");
+
+    if (status==1){
         int one = (int) (Math.random()*10000);
         int two = (int) (Math.random()*3000);
         int three = (int) (Math.random()*400);

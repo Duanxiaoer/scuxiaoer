@@ -18,7 +18,6 @@
     <title>submitUserInfo</title>
 </head>
 <body>
-
 <%
     PrintWriter writer=response.getWriter();
     request.setCharacterEncoding("utf-8");
@@ -36,16 +35,11 @@
     if (!pwd.equals(pwd_check)){
         status=2;
     }else{
-        DB db = new DB();
-        db.connectToDB();
         try{
-            ResultSet resultSet = db.queryUserinfo();
-            while(resultSet.next()){
-                if (email.equals(resultSet.getString("email"))){
-                    status=1;
-                }
-            }
-            
+            DB db = new DB();
+            db.connectToDB();
+            status = db.checkUser(email,"");
+
             switch (status){
                 case 0:
                     int one = (int) (Math.random()*10000);
@@ -79,7 +73,6 @@
     writer.flush();
     writer.close();
 %>
-
 </body>
 
 </html>
