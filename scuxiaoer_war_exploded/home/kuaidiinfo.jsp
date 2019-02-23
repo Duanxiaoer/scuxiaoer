@@ -30,7 +30,7 @@
 
     DB db = new DB();
     db.connectToDB();
-    ResultSet resultSet = db.queryKuaidi();
+    ResultSet resultSet = db.queryKuaidi(session.getAttribute("email").toString());
     if (resultSet!=null){
         try{
             int count=1;
@@ -53,19 +53,19 @@
                     cookie.setMaxAge(60*3);
                     cookie.setPath("/");
                     response.addCookie(cookie);
-                    writer.print("<script>window.location='kuaidiinfo.html'</script>");
+                    writer.print("<script>window.location='kuaidiinfo.html?amount="+count+"'</script>");
                 }
             }
 
             if (count == 1){
-                writer.print("<script>window.location='kuaidiinfo.html'</script>");
+                writer.print("<script>window.location='kuaidiinfo.html?amount=1'</script>");
             }
 
         }catch (SQLException e){
             e.printStackTrace();
         }
     }else{
-        writer.print("<script>window.location='kuaidiinfo.html'</script>");
+        writer.print("<script>window.location='kuaidiinfo.htmlamount=0'</script>");
     }
 %>
 </body>
