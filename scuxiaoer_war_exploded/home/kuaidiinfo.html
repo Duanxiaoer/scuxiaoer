@@ -200,24 +200,13 @@
 
     function setValues_refresh(id,show){
         var input = document.getElementById("kuaidi"+id);
-        var info = "姓名："+show[0]+"\n"+"电话："+show[1]+"\n"+"短信："+show[2]+"\n"+"地址："+show[3]+"\n"+"其他补充："+show[4]+"\n"+"小二："+show[5]+"\n"+"小二电话："+show[6];
+        var info = "姓名："+show[0]+"\n"+"电话："+show[1]+"\n"+"短信："+show[2]+"\n"+"地址："+show[3]+"\n"+"其他补充："+show[4]+"\n"+"小二："+show[5]+"\n"+"小二电话："+show[6]+"\n打赏小二：电话号码就是支付宝账号，嘿嘿~";
         input.value = info;
         ++showNum;//显示的任务数加1
     }
 
     function isNeedPay(){
-        if (totalNum>1){
-            var c = confirm("免费取件次数用完，如果还需继续取件请支付1元！");
-            if (c){
-                if (device === "PC") {
-                    window.location = "../alipay/alipay.trade.page.pay.jsp";
-                }else {
-                    window.location = "../alipay_phone/alipay.trade.wap.pay.jsp";
-                }
-            }
-        } else {
             window.location = "zhaokuaidi.html";
-        }
     }
 
 </script>

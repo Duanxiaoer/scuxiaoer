@@ -65,7 +65,7 @@
             e.printStackTrace();
         }
     }else{
-        writer.print("<script>window.location='kuaidiinfo.htmlamount=0'</script>");
+        writer.print("<script>window.location='kuaidiinfo.html?amount=0'</script>");
     }
 %>
 </body>

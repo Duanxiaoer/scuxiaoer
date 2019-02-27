@@ -76,12 +76,12 @@
 <body>
 
     <div style="width: 100%" class="container">
-        <h1 style="align-content: center">浏览名单</h1>
+        <h1 style="align-content: center">失物招领</h1>
 
         <br>
         <br>
         <form action="home.jsp" method="get">
-            <div style="padding-left: 5px"><input name="keywords" style="float: left" type="text" placeholder="姓名查询"><input style="float: left;margin-left: 10px;border-style: hidden;color: #4cae4c" type="submit" value="查询"><a href="home_menu.html"><input type="button" style="position: center" value="主页"></a></div>
+		<div style="padding-left: 5px"><input name="keywords" style="float: left" type="text" placeholder="姓名查询"><input style="float: left;margin-left: 10px;border-style: hidden;color: #4cae4c" type="submit" value="查询"><a href="home_menu.html"><input type="button" style="position: center" value="主页(代领快递)"></a></div>
         </form>
         <br>
         <br>
